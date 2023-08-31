@@ -13,17 +13,15 @@
  */
 int binary_tree_is_full(const binary_tree_t *tree)
 {
-	if (tree == NULL)
-	{
-		return (1); /* An empty tree is considered full*/
-	}
+	if (!tree)
+		return (0);
 
-	/* If a node has 0 or 2 children, check their subtrees recursively*/
-	if ((tree->left && !tree->right) || (!tree->left && tree->right))
-	{
-		return (0); /* The tree is not full*/
-	}
+	if (!tree->right && !tree->left)
+		return (1);
 
-	/* Recursively check the left and right subtrees*/
-	return (binary_tree_is_full(tree->left) && binary_tree_is_full(tree->right));
+	if (tree->right && tree->left)
+		return (binary_tree_is_full(tree->left) &&
+			binary_tree_is_full(tree->right));
+
+	return (0);
 }
